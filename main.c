@@ -6,6 +6,7 @@
 #include <Windows.h>
 #include <stdbool.h>
 #include "move.h"
+#include <locale.h>
 
 // Console size
 #define TAILLE_FEUILLE_X 30
@@ -14,11 +15,17 @@
 #define LENGTH_MIN 5
 #define LENGTH_MAX 15
 // Snake speed
-#define SPEEDSNAKE 100
+#define SPEEDSNAKE 10
 
 char tab[TAILLE_FEUILLE_X][TAILLE_FEUILLE_Y];
 
 int main() {
+    //changeDiff();
+    int test;
+    printf("test: ");
+    scanf_s("%d", &test);
+    system("cls");
+    setlocale(LC_ALL, "fr-FR");
     HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
     DWORD numberRead;
 
@@ -47,7 +54,8 @@ int main() {
         if (i != 29) printf("\n");
     }
     // Set '@'
-    for (int i = 0; i < 9; i++) {
+    int applenb = LENGTH_MAX - LENGTH_MIN;
+    for (int i = 0; i < applenb; i++) {
         moveCursor(rangedRand(0, 30), rangedRand(0, 30));
         setWriteColor(4);
         plotChar('@');
@@ -64,16 +72,16 @@ int main() {
     }
     Sleep(1000);
 
-    int keep_direction = rangedRand(1, 5);
+    int keep_direction = rangedRand(1, 10);
     while (snake.length < LENGTH_MAX) {
         if (keep_direction == 0) {
             // Change direction
             snake.direction = getRandomDirection(snake.direction);
-            keep_direction = rangedRand(1, 5);
+            keep_direction = rangedRand(1, 10);
         }
         // Get new coordinates
         COORD destination = getDestination(snake.coordinates[0], snake.direction);
-        if (destination.X != TAILLE_FEUILLE_X && destination.Y != TAILLE_FEUILLE_Y && destination.X != 0 && destination.Y != 0) {
+        if (destination.X != TAILLE_FEUILLE_X && destination.Y != TAILLE_FEUILLE_Y && destination.X >= 0 && destination.Y >= 0) {
             char dest_char;
             bool increase_length = false;
             ReadConsoleOutputCharacter(hOut, &dest_char, 1, destination, &numberRead);
@@ -85,9 +93,20 @@ int main() {
             moveTo(&snake, destination, !increase_length);
             keep_direction--;
         } else keep_direction = 0; // Forcing a change of destination
+        moveCursor(40, 15);
+        setBackGroundColor(0);
+        setWriteColor(15);
+        printf("Il vous reste %2d pomme(s) à manger !", applenb - (snake.length - LENGTH_MIN));
+        setWriteColor(1);
+        setBackGroundColor(15);
         Sleep(SPEEDSNAKE);
     }
-
+    moveCursor(40, 17);
+    setBackGroundColor(0);
+    setWriteColor(2);
+    printf("Félicitations ! Vous avez gagné... juste mon respect :)");
+    setWriteColor(1);
+    setBackGroundColor(15);
     Sleep(100000);
     closeConsole();
     return EXIT_SUCCESS;

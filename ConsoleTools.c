@@ -378,24 +378,22 @@ int rangedRand(int range_min, int range_max)
 
 
 
-int clearScreen(void) {
+void clearScreen() {
 	COORD consoleSize;
 
 	//consoleSize = getConsoleSize();
 	consoleSize.X = 120;
 	consoleSize.Y = 60;
-	// setWriteColor(GREY);
-	// setBackGroundColor(BLACK);
-	for (int i = 0; i < consoleSize.Y; i++)
+	setWriteColor(15);
+	setBackGroundColor(15);
+	for (int i = -1; i < consoleSize.Y; i++)
 	{
 		for (int j = 0; j < consoleSize.X; j++)
 		{
 			
 			moveCursor(j, i);
-			plotChar(' ');
+			plotChar("g");
 		}
 	}
-
-	return 0;
 }
 

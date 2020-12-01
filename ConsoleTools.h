@@ -76,6 +76,6 @@ int setWriteColor(WORD col);
 // change la couleur de fond des caractères
 int setBackGroundColor(WORD col);
 // nettoie l'écran
-int clearScreen(void);
+void clearScreen();
 
 

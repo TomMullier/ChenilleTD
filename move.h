@@ -102,3 +102,9 @@ COORD getDestination(COORD position, char direction) {
     }
     return destination;
 }
+
+void changeDiff() {
+    openConsole();
+    system("pause");
+    closeConsole();
+}
