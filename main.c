@@ -10,13 +10,19 @@
 // Console size
 #define TAILLE_FEUILLE_X 30
 #define TAILLE_FEUILLE_Y 30
-// Taille de la chenille
+// Snake size
 #define LENGTH_MIN 5
 #define LENGTH_MAX 15
+// Snake speed
+#define SPEEDSNAKE 100
 
 char tab[TAILLE_FEUILLE_X][TAILLE_FEUILLE_Y];
 
 int main() {
+    HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+    DWORD numberRead;
+
+    // Init snake
     Snake snake;
     snake.direction = 'O';
     snake.length = LENGTH_MIN;
@@ -58,13 +64,8 @@ int main() {
     }
     Sleep(1000);
 
-    COORD to;
-    to.X = 13;
-    to.Y = 11;
-    moveTo(&snake, to);
-
     int keep_direction = rangedRand(1, 5);
-    for (int i = 0; i < 40; i++) {
+    while (snake.length < LENGTH_MAX) {
         if (keep_direction == 0) {
             // Change direction
             snake.direction = getRandomDirection(snake.direction);
@@ -72,15 +73,22 @@ int main() {
         }
         // Get new coordinates
         COORD destination = getDestination(snake.coordinates[0], snake.direction);
-        if (destination.X != TAILLE_FEUILLE_X && destination.Y != TAILLE_FEUILLE_Y) {
+        if (destination.X != TAILLE_FEUILLE_X && destination.Y != TAILLE_FEUILLE_Y && destination.X != 0 && destination.Y != 0) {
+            char dest_char;
+            bool increase_length = false;
+            ReadConsoleOutputCharacter(hOut, &dest_char, 1, destination, &numberRead);
+            if (dest_char == '@') {
+                snake.length++;
+                increase_length = true;
+            } else increase_length = false;
             // Move snake
-            moveTo(&snake, destination);
+            moveTo(&snake, destination, !increase_length);
             keep_direction--;
         } else keep_direction = 0; // Forcing a change of destination
-        Sleep(100);
+        Sleep(SPEEDSNAKE);
     }
 
-    Sleep(100000000000);
+    Sleep(100000);
     closeConsole();
     return EXIT_SUCCESS;
 }

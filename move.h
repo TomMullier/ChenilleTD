@@ -6,7 +6,7 @@ struct SNAKE {
 };
 
 void logSnake(COORD a[], int size);
-void moveTo(Snake* snake, COORD head);
+void moveTo(Snake* snake, COORD head, bool erase_queue);
 char getRandomDirection(char last_direction);
 COORD getDestination(COORD position, char direction);
 
@@ -16,23 +16,28 @@ void logSnake(COORD a[], int size) {
 	}
 }
 
-
-void moveTo(Snake* snake, COORD head) {
-    hideCursor();
-    COORD to_erase;
-    to_erase.X = snake->coordinates[snake->length - 1].X;
-    to_erase.Y = snake->coordinates[snake->length - 1].Y;
+void moveTo(Snake* snake, COORD head, bool erase_queue) {
+    // Erase the snake queue
+    if (erase_queue) {
+        COORD to_erase;
+        to_erase.X = snake->coordinates[snake->length - 1].X;
+        to_erase.Y = snake->coordinates[snake->length - 1].Y;
+        moveCursor(to_erase.X, to_erase.Y);
+        plotChar(' ');
+    }
+    // Update snake.coordinates
     for (int i = snake->length - 1; i >= 0; i--) {
         snake->coordinates[i] = (i != 0) ? snake->coordinates[i - 1] : head;
     }
-    // Remove the snake queue
-    moveCursor(to_erase.X, to_erase.Y);
-    plotChar(' ');
     // Update the snake head
-    moveCursor(snake->coordinates[0].X, snake->coordinates[0].Y);
+    for (int i = 0; i < snake->length; i++) {
+        moveCursor(snake->coordinates[i].X, snake->coordinates[i].Y);
+        plotChar(i==0 ? 'X' : '0');
+    }
+    /*moveCursor(snake->coordinates[0].X, snake->coordinates[0].Y);
     plotChar('X');
     moveCursor(snake->coordinates[1].X, snake->coordinates[1].Y);
-    plotChar('0');
+    plotChar('0');*/
 }
 
 // Choose a random direction between (N)orth, (E)ast, (S)outh and (W)est
