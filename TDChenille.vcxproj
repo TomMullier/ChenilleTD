@@ -139,7 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\Downloads\ConsoleTools6.3\ConsoleTools6.3\ConsoleTools.c" />
+    <ClCompile Include="ConsoleTools.c" />
     <ClCompile Include="main.c" />
   </ItemGroup>
   <ItemGroup>

@@ -18,15 +18,15 @@
     <ClCompile Include="main.c">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Downloads\ConsoleTools6.3\ConsoleTools6.3\ConsoleTools.c">
+    <ClCompile Include="ConsoleTools.c">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ConsoleTools.h">
+    <ClInclude Include="move.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="move.h">
+    <ClInclude Include="ConsoleTools.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>

@@ -52,13 +52,13 @@ DWORD wOldMode;
 SYSTEMTIME elapsedTime(bool reset);
 // attend la frappe d'une touche parmi celles spécifiées en paramètre
 // ex: car =  readChar("onON");
-//char readChar(const char* filtre);
+char readChar(const char* filtre);
 // permet d'utiliser les fonctions moveCursor et PlotChar (un seul appel en début de programme)
 int openConsole();
 // CloseConsole() doit être appelée après la dernière utilisation de moveCursor et PlotChar
 int closeConsole();
 // renvoie la taille de la console
-COORD getConsoleSize();
+//COORD getConsoleSize();
 // déplace le curseur en X,Y position du prochain affichage
 void moveCursor(unsigned short int X, unsigned short int Y);
 // affiche un caractère à la position du curseur
