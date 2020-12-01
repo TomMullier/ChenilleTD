@@ -1,8 +1,13 @@
-#define TAILLE_FEUILLE 30 // Size Console
-#define LENGTH 3 // Size Snake
+typedef struct SNAKE Snake;
+struct SNAKE {
+	char direction;
+	int length;
+	COORD coordinates[];
+};
 
-void logSnake(COORD* a, int size);
-void updateSnake(COORD* snake, COORD head);
+void logSnake(COORD a[], int size);
+void moveTo(Snake* snake, COORD head);
+/*
 void direction(COORD* snake);
 void goUp(COORD* snake);
 void goDown(COORD* snake);
@@ -36,12 +41,6 @@ void updateSnake(COORD* snake, COORD head) {
 		int y = snake[i].Y;
 		moveCursor(x, y);
 		plotChar(i == 0 ? 'X' : '0');
-	}
-}
-
-void logSnake(COORD* a, int size) {
-	for (int i = 0; i < size; i++) {
-		printf("%d: %d;%d\n", i, a[i].X, a[i].Y);
 	}
 }
 
@@ -99,4 +98,4 @@ void goLeft(COORD* snake) {
 	Sleep(500);
 	hideCursor();
 	
-}
+}*/
