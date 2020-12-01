@@ -60,10 +60,22 @@ int main() {
     to.Y = 11;
     moveTo(&snake, to);
 
-    /*while (snake.length < LENGTH_MAX) {
-
-        Sleep(500);
-    }*/
+    int keep_direction = rangedRand(1, 5);
+    for (int i = 0; i < 40; i++) {
+        if (keep_direction == 0) {
+            // Change direction
+            snake.direction = getRandomDirection(snake.direction);
+            keep_direction = rangedRand(1, 5);
+        }
+        // Get new coordinates
+        COORD destination = getDestination(snake.coordinates[0], snake.direction);
+        if (destination.X != TAILLE_FEUILLE_X && destination.Y != TAILLE_FEUILLE_Y) {
+            // Move snake
+            moveTo(&snake, destination);
+            keep_direction--;
+        } else keep_direction = 0; // Forcing a change of destination
+        Sleep(100);
+    }
 
     Sleep(100000000000);
     closeConsole();
@@ -87,8 +99,64 @@ void moveTo(Snake* snake, COORD head) {
     plotChar('0');
 }
 
-void logSnake(COORD a[], int size) {
-    for (int i = 0; i < size; i++) {
-        printf("%d: %d;%d\n", i, a[i].X, a[i].Y);
+// Choose a random direction between (N)orth, (E)ast, (S)outh and (W)est
+// Doesn't return the 'last_direction'
+// Doesn't return the opposite of 'last_direction' to avoid backwards
+// Example : getRandomDirection('N') doesn't return 'N' or 'S'
+char getRandomDirection(char last_direction) {
+    char r;
+    char opposite;
+    int nb = rangedRand(0, 4);
+    switch (nb) {
+    case 0:
+        r = 'N';
+        opposite = 'S';
+        break;
+    case 1:
+        r = 'E';
+        opposite = 'W';
+        break;
+    case 2:
+        r = 'S';
+        opposite = 'N';
+        break;
+    case 3:
+        r = 'W';
+        opposite = 'E';
+        break;
+    default:
+        r = 'N';
+        opposite = 'S';
+        break;
     }
+    if (r == last_direction || opposite == last_direction) r = getRandomDirection(last_direction);
+    return r;
+}
+
+// Calcul the next coordinates with the chosen direction and the current position
+COORD getDestination(COORD position, char direction) {
+    COORD destination;
+    switch (direction) {
+    case 'N':
+        destination.X = position.X;
+        destination.Y = position.Y + 1;
+        break;
+    case 'E':
+        destination.X = position.X + 1;
+        destination.Y = position.Y;
+        break;
+    case 'S':
+        destination.X = position.X;
+        destination.Y = position.Y - 1;
+        break;
+    case 'W':
+        destination.X = position.X - 1;
+        destination.Y = position.Y;
+        break;
+    default:
+        destination.X = position.X;
+        destination.Y = position.Y + 1;
+        break;
+    }
+    return destination;
 }

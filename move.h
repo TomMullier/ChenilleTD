@@ -7,6 +7,14 @@ struct SNAKE {
 
 void logSnake(COORD a[], int size);
 void moveTo(Snake* snake, COORD head);
+char getRandomDirection(char last_direction);
+COORD getDestination(COORD position, char direction);
+
+void logSnake(COORD a[], int size) {
+	for (int i = 0; i < size; i++) {
+		printf("%d: %d;%d\n", i, a[i].X, a[i].Y);
+	}
+}
 /*
 void direction(COORD* snake);
 void goUp(COORD* snake);
