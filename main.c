@@ -181,6 +181,7 @@ int main() {
         moveCursor(40, 15);
         setBackGroundColor(0);
         setWriteColor(15);
+        hideCursor();
         printf("Il vous reste %2d pomme(s) à manger !", applenb - (snake.length - LENGTH_MIN));
         setWriteColor(1);
         setBackGroundColor(15);
