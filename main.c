@@ -12,7 +12,7 @@
 #define TAILLE_FEUILLE_X 30
 #define TAILLE_FEUILLE_Y 30
 // Snake size
-#define LENGTH_MIN 5
+
 #define LENGTH_MAX 15
 // Snake speed
 #define SPEEDSNAKE 10
@@ -43,16 +43,22 @@ int main() {
         switch (choice)
         {
         case 1:
+            #define LENGTH_MIN 5
             break;
         case 2:
+            #define LENGTH_MIN 7
             break;
         case 3:
+            #define LENGTH_MIN 9
             break;
         case 4:
+            #define LENGTH_MIN 11
             break;
         case 5:
+            #define LENGTH_MIN 13
             break;
         case 6:
+            #define LENGTH_MIN 15
             break;
         default:
             printf("Vous avez entré un mauvais nombre... Veuillez recommencer");
@@ -81,16 +87,22 @@ int main() {
         switch (choice2)
         {
         case 1:
+            #define LENGTH_MAX (LENGTH_MIN+5)
             break;
         case 2:
+            #define LENGTH_MAX (LENGTH_MIN+7)
             break;
         case 3:
+            #define LENGTH_MAX (LENGTH_MIN+9)
             break;
         case 4:
+            #define LENGTH_MAX (LENGTH_MIN+11)
             break;
         case 5:
+            #define LENGTH_MAX (LENGTH_MIN+13)
             break;
         case 6:
+            #define LENGTH_MAX (LENGTH_MIN+15)
             break;
         default:
             printf("Vous avez entré un mauvais nombre... Veuillez recommencer");
@@ -98,8 +110,6 @@ int main() {
             break;
         }
     } while (choice2 < 1 || choice2>6);
-    
-
     system("cls");
     HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
     DWORD numberRead;
