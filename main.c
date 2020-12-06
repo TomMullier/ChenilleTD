@@ -20,12 +20,87 @@
 char tab[TAILLE_FEUILLE_X][TAILLE_FEUILLE_Y];
 
 int main() {
-    //changeDiff();
-    int test;
-    printf("test: ");
-    scanf_s("%d", &test);
-    system("cls");
     setlocale(LC_ALL, "fr-FR");
+    //Menu Chnage Difficulty
+    int choice;
+    int choice2;
+    do
+    {
+        system("cls");
+        printf("================================\n");
+        printf("==LONGUEUR INITIALE DU SERPENT==\n");
+        printf("================================\n");
+        printf("\n");
+        printf("1. 5  Caractères\n");
+        printf("2. 7  Caractères\n");
+        printf("3. 9  Caractères\n");
+        printf("4. 11 Caractères\n");
+        printf("5. 13 Caractères\n");
+        printf("6. 15 Caractères\n");
+        printf("\n");
+        printf("Choix : ");
+        scanf_s("%d", &choice);
+        switch (choice)
+        {
+        case 1:
+            break;
+        case 2:
+            break;
+        case 3:
+            break;
+        case 4:
+            break;
+        case 5:
+            break;
+        case 6:
+            break;
+        default:
+            printf("Vous avez entré un mauvais nombre... Veuillez recommencer");
+            Sleep(1000);
+            break;
+        }
+        
+    } while (choice<1 || choice>6);
+
+    do
+    {
+        system("cls");
+        printf("================================\n");
+        printf("===NOMBRE DE POMMES A TROUVER===\n");
+        printf("================================\n");
+        printf("\n");
+        printf("1. 5  Pommes\n");
+        printf("2. 7  Pommes\n");
+        printf("3. 9  Pommes\n");
+        printf("4. 11 Pommes\n");
+        printf("5. 13 Pommes\n");
+        printf("6. 15 Pommes\n");
+        printf("\n");
+        printf("Choix : ");
+        scanf_s("%d", &choice2);
+        switch (choice2)
+        {
+        case 1:
+            break;
+        case 2:
+            break;
+        case 3:
+            break;
+        case 4:
+            break;
+        case 5:
+            break;
+        case 6:
+            break;
+        default:
+            printf("Vous avez entré un mauvais nombre... Veuillez recommencer");
+            Sleep(1000);
+            break;
+        }
+    } while (choice2 < 1 || choice2>6);
+    
+
+    system("cls");
     HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
     DWORD numberRead;
 
