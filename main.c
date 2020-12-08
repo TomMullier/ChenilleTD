@@ -12,7 +12,7 @@
 #define TAILLE_FEUILLE_X 30
 #define TAILLE_FEUILLE_Y 30
 // Snake size
-
+#define LENGTH_MIN 5
 #define LENGTH_MAX 15
 // Snake speed
 #define SPEEDSNAKE 10
@@ -20,97 +20,8 @@
 char tab[TAILLE_FEUILLE_X][TAILLE_FEUILLE_Y];
 
 int main() {
-    setlocale(LC_ALL, "fr-FR");
-    //Menu Chnage Difficulty
-    int choice;
-    int choice2;
-    do
-    {
-        system("cls");
-        printf("================================\n");
-        printf("==LONGUEUR INITIALE DU SERPENT==\n");
-        printf("================================\n");
-        printf("\n");
-        printf("1. 5  Caractères\n");
-        printf("2. 7  Caractères\n");
-        printf("3. 9  Caractères\n");
-        printf("4. 11 Caractères\n");
-        printf("5. 13 Caractères\n");
-        printf("6. 15 Caractères\n");
-        printf("\n");
-        printf("Choix : ");
-        scanf_s("%d", &choice);
-        switch (choice)
-        {
-        case 1:
-            #define LENGTH_MIN 5
-            break;
-        case 2:
-            #define LENGTH_MIN 7
-            break;
-        case 3:
-            #define LENGTH_MIN 9
-            break;
-        case 4:
-            #define LENGTH_MIN 11
-            break;
-        case 5:
-            #define LENGTH_MIN 13
-            break;
-        case 6:
-            #define LENGTH_MIN 15
-            break;
-        default:
-            printf("Vous avez entré un mauvais nombre... Veuillez recommencer");
-            Sleep(1000);
-            break;
-        }
-        
-    } while (choice<1 || choice>6);
-
-    do
-    {
-        system("cls");
-        printf("================================\n");
-        printf("===NOMBRE DE POMMES A TROUVER===\n");
-        printf("================================\n");
-        printf("\n");
-        printf("1. 5  Pommes\n");
-        printf("2. 7  Pommes\n");
-        printf("3. 9  Pommes\n");
-        printf("4. 11 Pommes\n");
-        printf("5. 13 Pommes\n");
-        printf("6. 15 Pommes\n");
-        printf("\n");
-        printf("Choix : ");
-        scanf_s("%d", &choice2);
-        switch (choice2)
-        {
-        case 1:
-            #define LENGTH_MAX (LENGTH_MIN+5)
-            break;
-        case 2:
-            #define LENGTH_MAX (LENGTH_MIN+7)
-            break;
-        case 3:
-            #define LENGTH_MAX (LENGTH_MIN+9)
-            break;
-        case 4:
-            #define LENGTH_MAX (LENGTH_MIN+11)
-            break;
-        case 5:
-            #define LENGTH_MAX (LENGTH_MIN+13)
-            break;
-        case 6:
-            #define LENGTH_MAX (LENGTH_MIN+15)
-            break;
-        default:
-            printf("Vous avez entré un mauvais nombre... Veuillez recommencer");
-            Sleep(1000);
-            break;
-        }
-    } while (choice2 < 1 || choice2>6);
     system("cls");
+    setlocale(LC_ALL, "fr-FR");
     HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
     DWORD numberRead;
 
@@ -173,15 +84,16 @@ int main() {
             if (dest_char == '@') {
                 snake.length++;
                 increase_length = true;
-            } else increase_length = false;
+            }
+            else increase_length = false;
             // Move snake
             moveTo(&snake, destination, !increase_length);
             keep_direction--;
-        } else keep_direction = 0; // Forcing a change of destination
+        }
+        else keep_direction = 0; // Forcing a change of destination
         moveCursor(40, 15);
         setBackGroundColor(0);
         setWriteColor(15);
-        hideCursor();
         printf("Il vous reste %2d pomme(s) à manger !", applenb - (snake.length - LENGTH_MIN));
         setWriteColor(1);
         setBackGroundColor(15);
